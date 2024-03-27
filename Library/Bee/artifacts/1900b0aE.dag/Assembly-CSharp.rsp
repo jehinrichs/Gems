@@ -354,8 +354,6 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.21f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/AppScript.cs"
 "Assets/GemScript.cs"
-"Assets/Tween/Demo/TweenDemo.cs"
-"Assets/Tween/Tween.cs"
 -langversion:9.0
 
 /deterministic

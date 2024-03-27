@@ -96,13 +96,15 @@ public class AppScript : MonoBehaviour
         {
             for (int y = 0; y < 8; y++)
             {
+                int yPos = 8 + y;
                 GameObject gem = grid[x][y];
                 if (gem.tag == "GemDestroy")
                 {
+                    //if(8 - y < firstRow) firstRow = 10 - y;
                     grid[x].RemoveAt(y);
                     Destroy(gem);
 
-                    GameObject prefab = createGem(x, y + 8);
+                    GameObject prefab = createGem(x, yPos);
                     grid[x].Add(prefab);
 
                     //GemScript gemScript = gem.GetComponent<GemScript>();
