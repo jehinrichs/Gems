@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class GemScript : MonoBehaviour
 
     public void AnimateGem(float yPos, float duration)
     {
-        StartCoroutine(LerpPosition(yPos, duration));
+        StartCoroutine(LerpPosition(yPos, duration, AnimComplete));
     }  
 
 
@@ -26,7 +27,7 @@ public class GemScript : MonoBehaviour
         appScript = GameObject.Find("App").GetComponent<AppScript>();
     }
 
-    IEnumerator LerpPosition(float yPos, float duration)
+    IEnumerator LerpPosition(float yPos, float duration, Action AnimCompleted)
     {
         float time = 0;
         Vector3 startPosition = transform.position;
@@ -35,14 +36,19 @@ public class GemScript : MonoBehaviour
         while (time < duration)
         {
             float speed = time/duration;
-            //https://chicounity3d.wordpress.com/2014 for Ease functions
-            //speed = Mathf.Sin(speed * Mathf.PI * 0.5f); //Ease In 
+            //speed = Mathf.Sin(speed * Mathf.PI * 0.5f); //Ease In - https://chicounity3d.wordpress.com/2014
             speed = 1f - Mathf.Cos(speed * Mathf.PI * 0.5f); //Ease Out
             transform.position = Vector3.Lerp(startPosition, targetPosition, speed);
             time += Time.deltaTime;
             yield return null;
         }
         transform.position = targetPosition;
+        AnimCompleted();
+    }
+
+    void AnimComplete(){
+        AppScript appScript = GameObject.Find("App").GetComponent<AppScript>();
+        appScript.animComplete();
     }
 
     void OnMouseDown()

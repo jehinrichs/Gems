@@ -246,7 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5462e31fb4d3e47b596e0f8973e8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gem: {fileID: 7597134489331414003, guid: 6909aae9c7465a742b72e2e5c8a4a677, type: 3}
+  gem: {fileID: 880812202568796711, guid: 6909aae9c7465a742b72e2e5c8a4a677, type: 3}
+  animCount: 0
 --- !u!4 &813966761
 Transform:
   m_ObjectHideFlags: 0

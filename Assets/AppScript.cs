@@ -5,16 +5,25 @@ using UnityEngine;
 public class AppScript : MonoBehaviour
 {
     public GameObject gem;
-    private int gemCount;
-    private bool doDestroy;
+
+    private int gemCount; 
+    private int animCount;  
+    private bool doDestroy;    
+    private List<List<GameObject>> grid = new List<List<GameObject>>();
 
     public void GemClicked(string gemName)
     {
-        //Debug.Log(gemName);
-        markGems();
+        if(animCount == 0) Debug.Log("here");
     }
 
-    List<List<GameObject>> grid = new List<List<GameObject>>();
+    public void animComplete()
+    {        
+        animCount++; //count completed animations
+        if (animCount == 64) {
+            animCount = 0;
+            markGems();
+        }
+    }
 
     void Start()
     {
@@ -29,6 +38,7 @@ public class AppScript : MonoBehaviour
             }
             grid.Add(column);
         }
+        markGems();
     }
 
     GameObject createGem(float xPos, float yPos)
@@ -108,6 +118,7 @@ public class AppScript : MonoBehaviour
 
     void animateGems()
     {
+        animCount = 0;
         for (int y = 0; y < 8; y++)
         {
             for (int x = 0; x < 8; x++)
@@ -118,10 +129,7 @@ public class AppScript : MonoBehaviour
                 gemScript.AnimateGem(y, duration * 0.25f);
             }
         }
-
-        //when animation is all done markGems();
     }
-
 
     void printGems()
     {
@@ -140,6 +148,6 @@ public class AppScript : MonoBehaviour
 
     void Update()
     {
-       
+
     }
 }
