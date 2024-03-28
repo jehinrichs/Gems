@@ -21,20 +21,14 @@ public class AppScript : MonoBehaviour
         gemCount = 0;
         for (int x = 0; x < 8; x++)
         {
-            float xPos = x;
             List<GameObject> column = new List<GameObject>();
-
             for (int y = 0; y < 8; y++)
             {
-                int yPos = y;
-                GameObject prefab = createGem(xPos, yPos);
+                GameObject prefab = createGem(x, y);
                 column.Add(prefab);
             }
             grid.Add(column);
         }
-
-        //updateGrid();
-        //printGrid();
     }
 
     GameObject createGem(float xPos, float yPos)
@@ -94,42 +88,22 @@ public class AppScript : MonoBehaviour
     {
         for (int x = 0; x < 8; x++)
         {
+            int yPos = 7;
             for (int y = 0; y < 8; y++)
             {
-                int yPos = 8 + y;
                 GameObject gem = grid[x][y];
                 if (gem.tag == "GemDestroy")
                 {
-                    //if(8 - y < firstRow) firstRow = 10 - y;
+                    yPos++;
                     grid[x].RemoveAt(y);
                     Destroy(gem);
 
                     GameObject prefab = createGem(x, yPos);
                     grid[x].Add(prefab);
-
-                    //GemScript gemScript = gem.GetComponent<GemScript>();
-                    //gemScript.AnimateGem(new Vector3(x, y, 0));
                 }
             }
         }
-
-
-        //GameObject[] destroyArray = GameObject.FindGameObjectsWithTag("GemDestroy");
-
-        //foreach (GameObject gem in destroyArray)
-        //{
-        //int posX = Mathf.RoundToInt(gem.transform.localPosition.x); 
-        //int posY = Mathf.RoundToInt(gem.transform.localPosition.y);
-
-        //Destroy(gem);
-
-        //GameObject prefab = createGem(posX, posY + 8);
-        //grid[posX].Insert(posY, prefab);
-        //}
-
         animateGems();
-        //markGems();
-        //printGems();     
     }
 
     void animateGems()
@@ -140,7 +114,7 @@ public class AppScript : MonoBehaviour
             {
                 GameObject gem = grid[x][y];
                 GemScript gemScript = gem.GetComponent<GemScript>();
-                int duration = (Mathf.RoundToInt(gem.transform.localPosition.y) - y); Debug.Log(duration);
+                int duration = (Mathf.FloorToInt(gem.transform.localPosition.y) - y); 
                 gemScript.AnimateGem(y, duration);
             }
         }
