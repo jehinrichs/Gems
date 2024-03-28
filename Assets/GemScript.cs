@@ -15,7 +15,7 @@ public class GemScript : MonoBehaviour
     [HideInInspector]
     public AppScript appScript;
 
-    public void AnimateGem(float yPos, int duration)
+    public void AnimateGem(float yPos, float duration)
     {
         StartCoroutine(LerpPosition(yPos, duration));
     }  
@@ -34,7 +34,11 @@ public class GemScript : MonoBehaviour
 
         while (time < duration)
         {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            float speed = time/duration;
+            //https://chicounity3d.wordpress.com/2014 for Ease functions
+            //speed = Mathf.Sin(speed * Mathf.PI * 0.5f); //Ease In 
+            speed = 1f - Mathf.Cos(speed * Mathf.PI * 0.5f); //Ease Out
+            transform.position = Vector3.Lerp(startPosition, targetPosition, speed);
             time += Time.deltaTime;
             yield return null;
         }

@@ -114,10 +114,12 @@ public class AppScript : MonoBehaviour
             {
                 GameObject gem = grid[x][y];
                 GemScript gemScript = gem.GetComponent<GemScript>();
-                int duration = (Mathf.FloorToInt(gem.transform.localPosition.y) - y); 
-                gemScript.AnimateGem(y, duration);
+                int duration = (Mathf.FloorToInt(gem.transform.localPosition.y) - y);
+                gemScript.AnimateGem(y, duration * 0.25f);
             }
         }
+
+        //when animation is all done markGems();
     }
 
 
