@@ -25,8 +25,16 @@ public class AppScript : MonoBehaviour
             {
                 secondGem = GameObject.Find(gemName);
             }
-            Debug.Log(firstGem);
-            Debug.Log(secondGem);
+            
+            if(firstGem != null && secondGem != null){
+                Vector3 firstGemPos = firstGem.transform.localPosition;
+                Vector3 secondGemPos = secondGem.transform.localPosition;
+                Vector3 firstGemPos_new = new Vector3(secondGemPos.x, secondGemPos.y, 0);
+                Vector3 secondGemPos_new = new Vector3(firstGemPos.x, firstGemPos.y, 0);
+                //gem[firstGemPos_new.x][firstGemPos_new.y] = firstGem;
+                //gem[secondGemPos_new.x][secondGemPos_new.y] = secondGem;
+                //swap gens
+            }
         };
     }
 
