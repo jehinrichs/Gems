@@ -11,16 +11,12 @@ public class GemScript : MonoBehaviour
     public string colorName;
 
     [HideInInspector]
-    public float yDestination;
-
-    [HideInInspector]
     public AppScript appScript;
 
     public void AnimateGem(float yPos, float duration)
     {
         StartCoroutine(LerpPosition(yPos, duration, AnimComplete));
     }  
-
 
     void Start()
     {
@@ -53,7 +49,7 @@ public class GemScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        appScript.GemClicked(name);
+        appScript.gemClicked(name);
     }
 
     void OnMouseEnter()

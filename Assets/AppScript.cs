@@ -6,20 +6,35 @@ public class AppScript : MonoBehaviour
 {
     public GameObject gem;
 
-    private int gemCount; 
-    private int animCount;  
-    private bool doDestroy;    
+    private GameObject firstGem;
+    private GameObject secondGem;
+    private int gemCount;
+    private int animCount;
+    private bool doDestroy;
     private List<List<GameObject>> grid = new List<List<GameObject>>();
 
-    public void GemClicked(string gemName)
+    public void gemClicked(string gemName)
     {
-        if(animCount == 0) Debug.Log("here");
+        if (animCount == 0)
+        {
+            if (firstGem == null)
+            {
+                firstGem = GameObject.Find(gemName);
+            }
+            else if(firstGem.name != gemName)
+            {
+                secondGem = GameObject.Find(gemName);
+            }
+            Debug.Log(firstGem);
+            Debug.Log(secondGem);
+        };
     }
 
     public void animComplete()
-    {        
+    {
         animCount++; //count completed animations
-        if (animCount == 64) {
+        if (animCount == 64)
+        {
             animCount = 0;
             markGems();
         }
