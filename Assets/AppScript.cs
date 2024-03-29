@@ -5,7 +5,10 @@ using UnityEngine;
 public class AppScript : MonoBehaviour
 {
     public GameObject gem;
+    public float speed;
 
+    private string firstName;
+    private string secondName;
     private GameObject firstGem;
     private GameObject secondGem;
     private int gemCount;
@@ -14,26 +17,37 @@ public class AppScript : MonoBehaviour
     private List<List<GameObject>> grid = new List<List<GameObject>>();
 
     public void gemClicked(string gemName)
-    {
+    {        
         if (animCount == 0)
         {
-            if (firstGem == null)
+            if (firstName == "")
             {
                 firstGem = GameObject.Find(gemName);
+                firstName = gemName;
             }
-            else if(firstGem.name != gemName)
+            else if(secondName == "" && gemName != firstName)
             {
                 secondGem = GameObject.Find(gemName);
+                secondName = gemName;
             }
-            
-            if(firstGem != null && secondGem != null){
-                Vector3 firstGemPos = firstGem.transform.localPosition;
-                Vector3 secondGemPos = secondGem.transform.localPosition;
-                Vector3 firstGemPos_new = new Vector3(secondGemPos.x, secondGemPos.y, 0);
-                Vector3 secondGemPos_new = new Vector3(firstGemPos.x, firstGemPos.y, 0);
-                //gem[firstGemPos_new.x][firstGemPos_new.y] = firstGem;
-                //gem[secondGemPos_new.x][secondGemPos_new.y] = secondGem;
-                //swap gens
+            if(firstName != "" && secondName != ""){
+                float firstXfloat = firstGem.transform.localPosition.x; int firstX = (int) firstXfloat;
+                float firstYfloat = firstGem.transform.localPosition.y; int firstY = (int) firstYfloat;
+                float secondXfloat = secondGem.transform.localPosition.x; int secondX = (int) secondXfloat;
+                float secondYfloat = secondGem.transform.localPosition.y; int secondY = (int) secondYfloat;
+
+                firstGem.transform.localPosition = new Vector3(secondXfloat, secondYfloat, 0);
+                secondGem.transform.localPosition = new Vector3(firstXfloat, firstYfloat, 0);
+
+                grid[secondX][secondY] = firstGem;
+                grid[firstX][firstY] = secondGem;
+                
+                firstName = "";
+                secondName = "";
+                firstGem = null;
+                secondGem = null;
+
+                markGems();
             }
         };
     }
@@ -50,6 +64,9 @@ public class AppScript : MonoBehaviour
 
     void Start()
     {
+        firstName = "";
+        secondName = "";
+
         gemCount = 0;
         for (int x = 0; x < 8; x++)
         {
@@ -149,7 +166,7 @@ public class AppScript : MonoBehaviour
                 GameObject gem = grid[x][y];
                 GemScript gemScript = gem.GetComponent<GemScript>();
                 int duration = (Mathf.FloorToInt(gem.transform.localPosition.y) - y);
-                gemScript.AnimateGem(y, duration * 0.25f);
+                gemScript.AnimateGem(y, duration / speed);
             }
         }
     }
