@@ -6,9 +6,11 @@ public class AppScript : MonoBehaviour
 {
     public GameObject gem;
     public float speed;
+    [HideInInspector]
 
     private string firstName;
     private string secondName;
+    private GameObject gems;
     private GameObject firstGem;
     private GameObject secondGem;
     private int gemCount;
@@ -66,6 +68,7 @@ public class AppScript : MonoBehaviour
     {
         firstName = "";
         secondName = "";
+        gems = GameObject.Find("Gems");
 
         gemCount = 0;
         for (int x = 0; x < 8; x++)
@@ -87,6 +90,7 @@ public class AppScript : MonoBehaviour
         string[] colorNames = new string[] { "red", "green", "blue", "yellow", "magenta", "cyan", "white" };
         Color[] colorCodes = { new Color(1, 0, 0, 1), new Color(0, 1, 0, 1), new Color(0, 0, 1, 1), new Color(1, 1, 0, 1), new Color(1, 0, 1, 1), new Color(0, 1, 1, 1), new Color(1, 1, 1, 1) };
         GameObject prefab = Instantiate(gem, new Vector3(xPos, yPos, 0), Quaternion.identity);
+        prefab.transform.parent = gems.transform; //parent prefab to gems gameobject
         Renderer renderer = prefab.GetComponentInChildren<Renderer>();
         renderer.material.color = colorCodes[index];
         prefab.GetComponentInChildren<GemScript>().colorName = colorNames[index];
