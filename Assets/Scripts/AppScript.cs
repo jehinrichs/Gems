@@ -6,7 +6,9 @@ public class AppScript : MonoBehaviour
 {
     public GameObject gem;
     public float speed;
+
     [HideInInspector]
+    public DevScript devScript;
 
     private string firstName;
     private string secondName;
@@ -48,8 +50,9 @@ public class AppScript : MonoBehaviour
                 secondName = "";
                 firstGem = null;
                 secondGem = null;
-
-                markGems();
+                
+                devScript.printGrid();
+                //markGems();
             }
         };
     }
@@ -69,6 +72,7 @@ public class AppScript : MonoBehaviour
         firstName = "";
         secondName = "";
         gems = GameObject.Find("Gems");
+        devScript = GameObject.Find("Dev").GetComponent<DevScript>();
 
         gemCount = 0;
         for (int x = 0; x < 8; x++)

@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gem: {fileID: 880812202568796711, guid: 6909aae9c7465a742b72e2e5c8a4a677, type: 3}
   speed: 4
+  devScript: {fileID: 0}
 --- !u!4 &813966761
 Transform:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
