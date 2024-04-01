@@ -10,6 +10,9 @@ public class AppScript : MonoBehaviour
     [HideInInspector]
     public DevScript devScript;
 
+    [HideInInspector]
+    public List<List<GameObject>> grid = new List<List<GameObject>>();
+
     private string firstName;
     private string secondName;
     private GameObject gems;
@@ -18,7 +21,6 @@ public class AppScript : MonoBehaviour
     private int gemCount;
     private int animCount;
     private bool doDestroy;
-    private List<List<GameObject>> grid = new List<List<GameObject>>();
 
     public void gemClicked(string gemName)
     {        

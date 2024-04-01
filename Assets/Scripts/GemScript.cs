@@ -64,8 +64,6 @@ public class GemScript : MonoBehaviour
 
     void Update()
     {
-        
-
         /*if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
