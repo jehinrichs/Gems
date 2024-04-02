@@ -10,8 +10,13 @@ public class DevScript : MonoBehaviour
     private GameObject app;
 
     public void printGrid(){
-        float xOffset = 8f;
+        float xOffset = 13f;
         float yOffset = -0.15f;
+
+         while (transform.childCount > 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+        }
 
         for (int x = 0; x < 8; x++)
         {

@@ -53,8 +53,8 @@ public class AppScript : MonoBehaviour
                 firstGem = null;
                 secondGem = null;
                 
-                devScript.printGrid();
-                //markGems();
+                //devScript.printGrid();
+                markGems();
             }
         };
     }
@@ -65,6 +65,7 @@ public class AppScript : MonoBehaviour
         if (animCount == 64)
         {
             animCount = 0;
+            //devScript.printGrid();
             markGems();
         }
     }
