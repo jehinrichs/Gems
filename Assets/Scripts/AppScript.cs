@@ -48,13 +48,19 @@ public class AppScript : MonoBehaviour
                 grid[secondX][secondY] = firstGem;
                 grid[firstX][firstY] = secondGem;
                 
-                firstName = "";
-                secondName = "";
-                firstGem = null;
-                secondGem = null;
+                
                 
                 //devScript.printGrid();
-                markGems();
+                bool validSwap = markGems();
+
+                if (validSwap){
+                    firstName = "";
+                    secondName = "";
+                    firstGem = null;
+                    secondGem = null;
+                }else{
+                    //swap back
+                }
             }
         };
     }
@@ -106,7 +112,7 @@ public class AppScript : MonoBehaviour
         return prefab;
     }
 
-    void markGems()
+    bool markGems()
     {
         doDestroy = false;
         for (int x = 0; x < 8; x++)
@@ -142,7 +148,11 @@ public class AppScript : MonoBehaviour
                 }
             }
         }
-        if (doDestroy) { destroyGems(); }
+        if (doDestroy) { 
+            destroyGems(); 
+        }
+
+        return doDestroy;
     }
 
     void destroyGems()
