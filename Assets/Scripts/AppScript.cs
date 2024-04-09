@@ -48,19 +48,17 @@ public class AppScript : MonoBehaviour
                 grid[secondX][secondY] = firstGem;
                 grid[firstX][firstY] = secondGem;
                 
-                
-                
                 //devScript.printGrid();
                 bool validSwap = markGems();
 
-                if (validSwap){
-                    firstName = "";
-                    secondName = "";
-                    firstGem = null;
-                    secondGem = null;
-                }else{
-                    //swap back
+                if (!validSwap){
+
                 }
+
+                firstName = "";
+                secondName = "";
+                firstGem = null;
+                secondGem = null;
             }
         };
     }
