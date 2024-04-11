@@ -172,11 +172,9 @@ public class AppScript : MonoBehaviour
                 }
             }
         }
-        //pause for one second
-        //Invoke("nothing", 0.5f);
         
         //pause for a moment before animating gems
-        Invoke("animateGems", 10f); //0.5f
+        //Invoke("animateGems", 10f); //0.5f
         //animateGems();
     }
 
