@@ -117,7 +117,9 @@ public class AppScript : MonoBehaviour
         {
             for (int y = 0; y < 8; y++)
             {
-                GameObject gem = grid[x][y]; GemScript gemScript = gem.GetComponentInChildren<GemScript>(); string gemColor = gemScript.colorName;
+                GameObject gem = grid[x][y]; 
+                GemScript gemScript = gem.GetComponentInChildren<GemScript>(); 
+                string gemColor = gemScript.colorName;
 
                 if (x < 6)
                 {
@@ -158,7 +160,7 @@ public class AppScript : MonoBehaviour
         for (int x = 0; x < 8; x++)
         {
             int yPos = 7;
-            for (int y = 0; y < 8; y++)
+            for (int y = 7; y >= 0; y--)
             {
                 GameObject gem = grid[x][y];
                 if (gem.tag == "GemDestroy")
@@ -174,7 +176,7 @@ public class AppScript : MonoBehaviour
         }
         
         //pause for a moment before animating gems
-        //Invoke("animateGems", 10f); //0.5f
+        Invoke("animateGems", 0.5f); //0.5f
         //animateGems();
     }
 
