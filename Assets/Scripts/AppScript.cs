@@ -22,6 +22,20 @@ public class AppScript : MonoBehaviour
     private int animCount;
     private bool doDestroy;
 
+    void swapGem(GameObject gem1, GameObject gem2)
+    {
+        float firstXfloat = gem1.transform.localPosition.x; int firstX = (int)firstXfloat;
+        float firstYfloat = gem1.transform.localPosition.y; int firstY = (int)firstYfloat;
+        float secondXfloat = gem2.transform.localPosition.x; int secondX = (int)secondXfloat;
+        float secondYfloat = gem2.transform.localPosition.y; int secondY = (int)secondYfloat;
+
+        gem1.transform.localPosition = new Vector3(secondXfloat, secondYfloat, 0);
+        gem2.transform.localPosition = new Vector3(firstXfloat, firstYfloat, 0);
+
+        grid[secondX][secondY] = gem1;
+        grid[firstX][firstY] = gem2;
+    }
+
     public void gemClicked(string gemName)
     {        
         if (animCount == 0)
@@ -37,22 +51,14 @@ public class AppScript : MonoBehaviour
                 secondName = gemName;
             }
             if(firstName != "" && secondName != ""){
-                float firstXfloat = firstGem.transform.localPosition.x; int firstX = (int) firstXfloat;
-                float firstYfloat = firstGem.transform.localPosition.y; int firstY = (int) firstYfloat;
-                float secondXfloat = secondGem.transform.localPosition.x; int secondX = (int) secondXfloat;
-                float secondYfloat = secondGem.transform.localPosition.y; int secondY = (int) secondYfloat;
+                swapGem(firstGem, secondGem);                
 
-                firstGem.transform.localPosition = new Vector3(secondXfloat, secondYfloat, 0);
-                secondGem.transform.localPosition = new Vector3(firstXfloat, firstYfloat, 0);
-
-                grid[secondX][secondY] = firstGem;
-                grid[firstX][firstY] = secondGem;
-                
-                //devScript.printGrid();
                 bool validSwap = markGems();
-
                 if (!validSwap){
-
+                   //var swapMethod = this.GetType().GetMethod("swapGem");
+                   //var arguments = new object[] { firstGem, secondGem};
+                   //Invoke(this, arguments, 0.25f); //0.5f
+                   swapGem(firstGem, secondGem);
                 }
 
                 firstName = "";
@@ -176,8 +182,7 @@ public class AppScript : MonoBehaviour
         }
         
         //pause for a moment before animating gems
-        Invoke("animateGems", 0.5f); //0.5f
-        //animateGems();
+        Invoke("animateGems", 0.25f); //0.5f
     }
 
     void nothing()
